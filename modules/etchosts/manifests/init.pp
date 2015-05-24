@@ -26,11 +26,11 @@ class etchosts ($ownhostname) {
     owner   => 1546
   }
 
-  file { 'agent_sysconfig':
+  /*file { 'agent_sysconfig':
     path    => "/etc/sysconfig/network",
     ensure  => present,
     replace => true,
     content => "NETWORKING=yes \nHOSTNAME=${ownhostname}" # own hostname
-  }
+  }*/
 
 }

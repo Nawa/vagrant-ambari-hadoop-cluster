@@ -3,12 +3,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "centos6.4Min"
-  config.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box"
+  config.vm.box = "ubuntu/precise64"
 
-  config.vm.define :one do |one| 
+  config.vm.define :one do |one|
     one.vm.hostname = "one.cluster"
     one.vm.network :private_network, ip: "192.168.0.101"
+    one.vm.network "forwarded_port", guest: 8080, host: 8889
+
     one.vm.provider :virtualbox do |vb|
       vb.customize ["modifyvm", :id, "--memory", 2048]
     end
@@ -20,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define :two do |two| 
+  config.vm.define :two do |two|
     two.vm.hostname = "two.cluster"
     two.vm.network :private_network, ip: "192.168.0.102"
     two.vm.provider :virtualbox do |vb|
@@ -34,7 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define :three do |three| 
+  config.vm.define :three do |three|
     three.vm.hostname = "three.cluster"
     three.vm.network :private_network, ip: "192.168.0.103"
     three.vm.provider :virtualbox do |vb|

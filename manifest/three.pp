@@ -16,5 +16,9 @@ class { 'ambari_agent':
   ownhostname    => "three.cluster"
 }
 
+exec { 'apt-get-update':
+  command     => '/usr/bin/apt-get update'
+}
+
 # Establish ordering
 Class['interfering_services'] -> Class['ntp'] -> Class['etchosts'] -> Class['ambari_agent']

@@ -4,16 +4,16 @@ class ambari_server ($ownhostname) {
 
   # Ambari Repo
   exec { 'get-ambari-server-repo':
-    command => "wget http://public-repo-1.hortonworks.com/ambari/centos6/1.x/updates/1.7.0/ambari.repo",
-    cwd     => '/etc/yum.repos.d/',
-    creates => '/etc/yum.repos.d/ambari.repo',
+    command => "wget http://public-repo-1.hortonworks.com/ambari/ubuntu12/1.x/updates/1.7.0/ambari.list",
+    cwd     => '/etc/apt/sources.list.d',
+    creates => '/etc/apt/sources.list.d/ambari.repo',
     user    => root
   }
 
   # Ambari Server
   package { 'ambari-server':
     ensure  => present,
-    require => Exec[get-ambari-server-repo]
+    require => [Exec[get-ambari-server-repo], Exec[apt-get-update]]
   }
 
   exec { 'ambari-setup':

@@ -22,5 +22,9 @@ class { 'ambari_agent':
   serverhostname => 'one.cluster'
 }
 
+exec { 'apt-get-update':
+  command     => '/usr/bin/apt-get update'
+}
+
 # Establish ordering
 Class['interfering_services'] -> Class['ntp'] -> Class['etchosts'] -> Class['ambari_server'] -> Class['ambari_agent']

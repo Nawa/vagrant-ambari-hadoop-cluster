@@ -1,7 +1,7 @@
 
 class interfering_services {
   # Disable Package KIT
-  file { 'packageKit':
+  /*file { 'packageKit':
     path    => "/etc/yum/pluginconf.d/refresh-packagekit.conf",
     ensure  => "present",
     replace => true,
@@ -17,5 +17,5 @@ class interfering_services {
    exec { "stop_ip_tables6":
     path    => ["/bin/", "/sbin/", "/usr/bin/", "/usr/sbin/"],
     command => "service ip6tables stop"
-  }
+  }*/
 }
